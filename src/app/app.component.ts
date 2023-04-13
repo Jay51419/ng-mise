@@ -1,4 +1,5 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
 interface ReviewModel {
   profileUrl: string;
@@ -11,7 +12,7 @@ interface ReviewModel {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements OnInit {
   title = 'ng-mise';
   @Input() senderAmount: number = 10000;
   senderCurrency: string = "INR"
@@ -24,7 +25,18 @@ export class AppComponent implements AfterViewInit {
   recipientAmount: string = (this.totalAmount / this.recipientCurrencyRate).toFixed(2)
   senderErrorMessage = ""
   showErrorMessage = false
-  constructor(private reviewWrapper: ElementRef<HTMLDivElement>) { }
+  constructor(public breakpointObserver: BreakpointObserver) { }
+  ngOnInit(): void {
+    this.breakpointObserver
+      .observe(['(min-width: 1024px)'])
+      .subscribe((state: BreakpointState) => {
+        if (state.matches) {
+          this.reviewsWidth = 400
+        } else {
+          this.reviewsWidth = 288;
+        }
+      });
+  }
   reviews: ReviewModel[] = [
     {
       profileUrl: "assets/us.png",
@@ -51,9 +63,6 @@ export class AppComponent implements AfterViewInit {
   reviewsWidth = this.reviews.length
   previousReviewCount: number = 0;
   previousReviewTranslateX: number = 0;
-  ngAfterViewInit() {
-    this.reviewsWidth = this.reviewWrapper.nativeElement.offsetWidth / (this.reviewsLength - 1)
-  }
   calculateAmount() {
     if (this.senderAmount >= 5000) {
       this.senderErrorMessage = ""
@@ -66,12 +75,12 @@ export class AppComponent implements AfterViewInit {
   }
   nextReview() {
     this.previousReviewCount += 1
-    this.previousReviewTranslateX += this.reviewsWidth - 32;
+    this.previousReviewTranslateX += this.reviewsWidth + 8;
 
   }
   previousReview() {
     this.previousReviewCount -= 1
-    this.previousReviewTranslateX -= this.reviewsWidth -32;
+    this.previousReviewTranslateX -= this.reviewsWidth + 8;
 
   }
 
