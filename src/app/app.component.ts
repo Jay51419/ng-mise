@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+import Scrollbar,{ScrollbarPlugin} from 'smooth-scrollbar';
 
 interface ReviewModel {
   profileUrl: string;
@@ -12,7 +13,7 @@ interface ReviewModel {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   title = 'ng-mise';
   @Input() senderAmount: number = 10000;
   senderCurrency: string = "INR"
@@ -25,7 +26,11 @@ export class AppComponent implements OnInit {
   recipientAmount: string = (this.totalAmount / this.recipientCurrencyRate).toFixed(2)
   senderErrorMessage = ""
   showErrorMessage = false
-  constructor(public breakpointObserver: BreakpointObserver) { }
+  constructor(public breakpointObserver: BreakpointObserver, private scrollWrapper: ElementRef<HTMLDivElement>) { }
+  ngAfterViewInit(): void {
+    Scrollbar.use(DisableScroll)
+    Scrollbar.init(this.scrollWrapper.nativeElement,{alwaysShowTracks:true})
+  }
   ngOnInit(): void {
     this.breakpointObserver
       .observe(['(min-width: 1024px)'])
@@ -85,3 +90,17 @@ export class AppComponent implements OnInit {
   }
 
 }
+
+
+class DisableScroll extends ScrollbarPlugin {
+  static override pluginName = 'DisableScroll'
+
+  override transformDelta(delta:any, fromEvent:any) {
+    delta['x'] = 0
+
+    return delta
+  }
+}
+
+DisableScroll.pluginName = 'DisableScroll'
+
