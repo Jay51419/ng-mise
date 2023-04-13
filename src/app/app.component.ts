@@ -28,7 +28,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   showErrorMessage = false
   constructor(public breakpointObserver: BreakpointObserver, private scrollWrapper: ElementRef<HTMLDivElement>) { }
   ngAfterViewInit(): void {
-    Scrollbar.use(DisableScroll)
     Scrollbar.init(this.scrollWrapper.nativeElement,{alwaysShowTracks:true})
   }
   ngOnInit(): void {
@@ -90,17 +89,3 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
 }
-
-
-class DisableScroll extends ScrollbarPlugin {
-  static override pluginName = 'DisableScroll'
-
-  override transformDelta(delta:any, fromEvent:any) {
-    delta['x'] = 0
-
-    return delta
-  }
-}
-
-DisableScroll.pluginName = 'DisableScroll'
-
