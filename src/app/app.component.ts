@@ -1,6 +1,5 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import Scrollbar, { ScrollbarPlugin } from 'smooth-scrollbar';
+import { AfterViewInit, Component, ElementRef } from '@angular/core';
+import Scrollbar from 'smooth-scrollbar';
 import { ScrollbarService } from './scrollbar.service';
 
 

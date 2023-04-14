@@ -27,7 +27,7 @@ class ModalPlugin extends ScrollbarPlugin {
     open: false,
   };
 
-  override transformDelta(delta: any) {
+  override transformDelta(delta: { x: number, y: number }) {
     return this.options.open ? { x: 0, y: 0 } : delta;
   }
 }

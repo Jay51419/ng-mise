@@ -1,5 +1,5 @@
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ScrollbarService } from '../scrollbar.service';
 
 
@@ -16,17 +16,17 @@ interface ReviewModel {
   styles: [
   ]
 })
-export class HomePageComponent {
+export class HomePageComponent implements OnInit {
   showMenu = false;
-  senderAmount: number = 10000;
-  senderCurrency: string = "INR"
-  recipientCurrency: string = "USD"
-  recipientCurrencyRate: number = 82.0102
-  bankTransferFees: number = 0;
-  ourFees: number = 329.94;
-  totalFees: number = this.bankTransferFees + this.ourFees;
-  totalAmount: number = this.senderAmount - this.totalFees;
-  recipientAmount: string = (this.totalAmount / this.recipientCurrencyRate).toFixed(2)
+  senderAmount = 10000;
+  senderCurrency = "INR"
+  recipientCurrency = "USD"
+  recipientCurrencyRate = 82.0102
+  bankTransferFees = 0;
+  ourFees = 329.94;
+  totalFees = this.bankTransferFees + this.ourFees;
+  totalAmount = this.senderAmount - this.totalFees;
+  recipientAmount = (this.totalAmount / this.recipientCurrencyRate).toFixed(2)
   senderErrorMessage = ""
   showErrorMessage = false
   reviews: ReviewModel[] = [
@@ -53,8 +53,8 @@ export class HomePageComponent {
   ]
   reviewsLength = this.reviews.length
   reviewsWidth = this.reviews.length
-  previousReviewCount: number = 0;
-  previousReviewTranslateX: number = 0;
+  previousReviewCount = 0;
+  previousReviewTranslateX = 0;
 
   constructor(public breakpointObserver: BreakpointObserver, private scrollbar: ScrollbarService) { }
   ngOnInit(): void {
