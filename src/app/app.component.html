@@ -33,7 +33,7 @@
           class="font-semibold text-lg text-primary bg-secondary px-4 py-1 rounded-full hover:brightness-90 ">Log
           in</a>
       </div>
-      <div [ngClass]="showMenu?'flex':'hidden'" class="transition duration-300 flex  flex-col items-start gap-y-4 absolute top-0 right-0  h-screen w-full bg-white p-4">
+      <div [ngClass]="showMenu?'translate-x-0':'-translate-x-full'" class="transition duration-300 flex  flex-col items-start gap-y-4 absolute top-0 right-0  h-screen w-full bg-white p-4">
         <div class="border-b w-full py-4 flex justify-between items-center" >
         <h1 class="font-black italic text-4xl text-primary ">MISE</h1>
         <button (click)="toggleShowMenu()" class="text-2xl text-gray-400 " >close</button>
