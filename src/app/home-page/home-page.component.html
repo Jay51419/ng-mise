@@ -1,0 +1,269 @@
+<header class="w-full flex flex-col justify-center items-center gap-y-10 mt-20 px-4">
+    <h1 class="text-4xl md:text-5xl lg:text-8xl font-black tracking-tighter text-center">
+        MONEY FOR HERE, <br> THERE AND <br> EVERYWHERE
+    </h1>
+    <p class="text-center text-gray-700 font-semibold">
+        170 countries. 50 currencies. Get account built to save <br> you money round the world.
+    </p>
+    <div class="flex flex-col lg:block lg:space-x-4 gap-4 w-full lg:w-auto">
+        <a href=""
+            class="w-full text-center font-semibold text-lg text-primary bg-secondary px-4 py-2 rounded-full hover:brightness-90 ">Open
+            an account</a>
+        <a href=""
+            class="w-full text-center font-semibold text-lg text-primary border border-primary px-4 py-2 rounded-full hover:bg-secondary hover:border-0">Send
+            money now</a>
+    </div>
+</header>
+<section class="h-screen w-full hidden lg:flex  justify-center space-x-24 mt-16">
+    <div class="space-y-6 ">
+        <h3 class="font-bold text-5xl">
+            Manage all your <br>
+            currencies all over <br> the world
+        </h3>
+        <p class="text-gray-700 font-semibold">Save upto 2x when you send, convert and <br> withdraw 50 currencies, all
+            in
+            one account. </p>
+        <div class="space-x-4">
+            <a href=""
+                class="font-semibold text-lg text-primary bg-secondary px-4 py-2 rounded-full hover:brightness-90 ">Open
+                an account</a>
+            <a href=""
+                class="font-semibold text-lg text-primary border border-primary px-4 py-2 rounded-full hover:bg-secondary hover:border-0">Compare
+                savings</a>
+        </div>
+    </div>
+    <div>
+        <img class="object-contain h-screen" src="assets/girl.jpg" alt="">
+    </div>
+</section>
+<main class="h-screen w-full flex justify-center items-center p-4 lg:px-24 lg:space-x-24 mt-16 bg-secondary">
+    <div class="space-y-6 hidden lg:block">
+        <div>
+            <h3 class="font-bold text-5xl text-primary">
+                Save upto 9x when you<br>
+                send currencies
+            </h3>
+            <p class="text-primary font-semibold mt-4"> Sending money shoudn't cost the earth, so we built MISE to
+                save you money
+                when you transfer and exchange internationally. We charge as little as possible: right now a tiny fee,
+                eventually
+                free.</p>
+        </div>
+
+    </div>
+    <div class="w-full lg:w-[50rem] bg-white rounded-3xl p-8 space-y-2">
+        <p class="text-gray-600 text-md">You send exacty</p>
+        <div class="relative rounded-xl flex items-center">
+            <input [(ngModel)]="senderAmount" (keydown)="calculateAmount()" type="text" maxlength="10"
+                class="w-full py-4 px-2 rounded-xl border border-gray-600 font-semibold text-xl">
+            <button class="absolute right-3 flex items-center gap-x-2">
+                <img class="h-8 w-8" src="assets/india.png" alt="">
+                <span class="text-primary font-bold text-xl">INR</span>
+                <img class="h-3 w-3" src="/assets/chevron-down-solid.svg" alt="">
+            </button>
+        </div>
+        <div>
+            <span class="font-semibold text-red-600">{{showErrorMessage?senderErrorMessage:""}}</span>
+        </div>
+        <div class="space-y-2">
+            <div class="flex justify-between items-center">
+                <span class="flex gap-x-2 items-center font-semibold">
+                    <div class="h-4 w-4 rounded-full bg-gray-100 flex justify-center items-center"></div>
+                    {{bankTransferFees}}
+                    INR
+                </span>
+                <span class="text-primary underline font-semibold ">Bank transfer fee</span>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="flex gap-x-2 items-center font-semibold">
+                    <div class="h-4 w-4 rounded-full bg-gray-100 flex justify-center items-center"></div>{{ourFees}} INR
+                </span>
+                <span class="text-gray-600 ">Our fee</span>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="flex gap-x-2  items-center font-semibold">
+                    <div class="h-4 w-4 rounded-full bg-gray-100 flex justify-center items-center">-</div>{{totalFees}}
+                    INR
+                </span>
+                <span class="text-gray-600 ">Total fees</span>
+            </div>
+            <hr>
+            <div class="flex justify-between items-center">
+                <span class="flex gap-x-2 items-center font-semibold">
+                    <div class="h-4 w-4 rounded-full bg-gray-100 flex justify-center items-center">=</div>
+                    {{totalAmount}} INR
+                </span>
+                <span class="text-gray-600 ">Total amount</span>
+            </div>
+            <div class="flex justify-between items-center text-primary">
+                <span class="flex gap-x-2 items-center font-semibold">
+                    <div class="h-4 w-4 rounded-full bg-gray-100 flex justify-center items-center">÷</div>
+                    <span class="underline">
+                        {{recipientCurrencyRate}}
+                    </span>
+                </span>
+                <span class="underline font-semibold">Guaranteed rate (24h)</span>
+            </div>
+        </div>
+        <p class="text-gray-600 text-md">Recipient gets</p>
+        <div class="relative rounded-xl flex items-center">
+            <input disabled [(ngModel)]="recipientAmount" type="text" maxlength="10"
+                class="w-full py-4 px-2 rounded-xl border border-gray-600 font-semibold text-xl">
+            <button class="absolute right-3 flex items-center gap-x-2">
+                <img class="h-8 w-8" src="assets/us.png" alt="">
+                <span class="text-primary font-bold text-xl">USD</span>
+                <img class="h-3 w-3" src="/assets/chevron-down-solid.svg" alt="">
+            </button>
+        </div>
+        <div class="text-gray-600 py-4">
+            You could save up to <span class="font-semibold">1,296.02 INR</span> <br>
+            Should arrive <span class="font-semibold">by Friday</span>
+        </div>
+        <a href=""
+            class="w-full font-semibold text-lg bg-secondary text-primary py-2 rounded-full flex justify-center items-center hover:brightness-110">Get
+            Started</a>
+    </div>
+</main>
+
+<section class="px-4 lg:px-24 mt-16 ">
+    <div class="hidden lg:flex w-full justify-center items-center">
+        <img class="h-screen" src="assets/card.jpg" alt="">
+    </div>
+    <div class="lg:p-12  space-y-8">
+        <h3 class="text-5xl font-bold">The card that's <br> always got the <br> right currency</h3>
+        <p class="text-gray-700 font-semibold">
+            Save as you spend and withdraw over <br> 50 currencies at the live rate <br> automatically.
+        </p>
+        <div class="space-x-4">
+            <a href=""
+                class="font-semibold text-lg text-primary bg-secondary px-4 py-2 rounded-full hover:brightness-90 ">Order
+                your
+                card</a>
+            <a href=""
+                class="font-semibold text-lg text-primary border border-primary px-4 py-2 rounded-full hover:bg-secondary hover:border-0">Learn
+                more</a>
+        </div>
+    </div>
+    <hr class="mt-8">
+
+    <div class="block lg:flex items-center mt-10  space-y-8 lg:space-y-0 lg:space-x-8">
+        <div class="flex items-center gap-x-4">
+            <div class="w-12 h-12 bg-gray-200 rounded-full flex justify-center items-center">
+                <img class="h-6 w-6" src="assets/lock-solid.svg" alt="">
+            </div>
+            <p class="text-gray-600 font-bold">
+                We're registered with the Financial <br> Crimes Enforcement Network <br> in the US
+            </p>
+        </div>
+        <div class="flex items-center gap-x-4">
+            <div class="w-12 h-12 bg-gray-200 rounded-full flex justify-center items-center">
+                <img class="h-6 w-6" src="assets/key-solid.svg" alt="">
+            </div>
+            <p class="text-gray-600 font-bold">
+                We protect your details through <br> <span class="text-primary underline">strict standards</span>
+            </p>
+        </div>
+    </div>
+</section>
+<section class="px-4 lg:px-24 mt-24 bg-secondary h-screen w-full flex  flex-col justify-center space-y-8">
+    <h2 class="text-4xl lg:text-7xl text-primary font-black tracking-tighter">
+        TRUSTED BY BUSI- <br>NESSES SMALL AND <br> LARGE
+    </h2>
+    <p class="text-primary text-md font-semibold w-80">
+        Go global with the international business account. Pay employees, get paid and manage your cash flow in
+        multiple currencies. Join over 300,000 businesses thriving with Mise.
+    </p>
+    <div class="space-y-4 lg:space-x-4">
+        <a href=""
+            class="inline-block w-full lg:w-auto text-center font-semibold text-lg text-secondary bg-primary px-6 py-3 rounded-full hover:brightness-200 ">Open
+            a business account </a>
+        <a href=""
+            class="inline-block w-full lg:w-auto text-center  font-semibold text-lg text-primary border border-primary px-6 py-3 rounded-full hover:bg-primary hover:text-secondary hover:border-0">Learn
+            more</a>
+    </div>
+</section>
+<section class="p-4 lg:pl-24 flex flex-col lg:flex-row lg:items-center h-full w-full py-6 space-x-4 overflow-hidden">
+    <div class=" space-y-2 lg:space-y-12  flex-shrink-0">
+        <h3 class="text-4xl lg:text-6xl font-black tracking-tighter">
+            FOR PEOPLE <br> GOING PLACES
+        </h3>
+        <div class="flex justify-between lg:justify-start lg:space-x-8 z-50">
+            <button (click)="previousReview()" [disabled]="previousReviewCount==0"
+                [ngClass]="{'opacity-50':previousReviewCount==0}"
+                class="scale-90 lg:scale-100 h-16 w-16 bg-gray-200 rounded-full flex justify-center items-center">
+                <img class="h-8 w-8 " src="assets/arrow-left-solid.svg" alt="">
+            </button>
+            <button (click)="nextReview()" [disabled]="previousReviewCount==(reviewsLength)"
+                [ngClass]="{'opacity-50':previousReviewCount==(reviewsLength)}"
+                class="scale-90 lg:scale-100h-16 w-16 bg-gray-200 rounded-full flex justify-center items-center">
+                <img class="h-8 w-8 rotate-180" src="assets/arrow-left-solid.svg" alt="">
+            </button>
+        </div>
+    </div>
+    <div #reviewWrapper class="w-full h-full  mt-4 -z-[100]">
+        <div [ngStyle]="{'transform': 'translateX('+(-previousReviewTranslateX) +'px)'}"
+            class="flex gap-x-4 w-full transition-all duration-300">
+            <div *ngFor="let review of reviews;let i=index">
+                <div [ngStyle]="{'transform': 'scale('+(previousReviewCount>=i+1?'0':'1' ) +')'}"
+                    class="block transition-all duration-300 h-full w-[18rem] lg:w-[25rem] bg-secondary rounded-2xl p-4 lg:p-8 space-y-8">
+                    <img class="h-24 w-24 rounded-full" src="{{review.profileUrl}}" alt="">
+                    <p class="font-bold text-2xl lg:text-4xl text-primary">
+                        "{{review.review}}"
+                    </p>
+                    <div class="py-2 lg:pt-6">
+                        <a href="{{review.videoUrl}}"
+                            class="font-semibold text-lg text-secondary bg-primary px-6 py-3 rounded-full hover:brightness-200 ">Watch
+                            video</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<section class="w-full px-8 lg:px-24 py-16">
+    <div class="space-y-8">
+        <div class="flex flex-col gap-y-4 lg:gap-y-8">
+            <h3 class="font-bold text-5xl lg:text-7xl">
+                Disappoint thieves
+            </h3>
+            <p class="text-gray-700 font-semibold w-80 lg:w-96">
+                Every month, our customers trust us to move over $10 billion of their money. Here are some of the
+                important
+                ways to protect them.
+            </p>
+            <div class="pt-6">
+                <a href=""
+                    class="font-semibold text-lg text-primary bg-secondary px-6 py-3 rounded-full hover:brightness-90 ">How
+                    we keep your money safe</a>
+            </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row lg:items-center gap-y-4 lg:space-x-16  lg:pt-12">
+            <div class="space-y-4 flex lg:block items-center gap-x-4">
+                <div class="w-16 h-16 bg-gray-200 rounded-full flex justify-center items-center">
+                    <img class="h-9 w-9" src="assets/lock-solid.svg" alt="">
+                </div>
+                <p class="text-gray-600 font-bold w-52">
+                    Our dedicated fraud and security teams work to keep your money safe
+                </p>
+            </div>
+            <div class="space-y-4 flex lg:block items-center gap-x-4">
+                <div class="w-16 h-16 bg-gray-200 rounded-full flex justify-center items-center">
+                    <img class="h-9 w-9" src="assets/mobile-solid.svg" alt="">
+                </div>
+                <p class="text-gray-600 font-bold w-52">
+                    We use 2-factor authentication to protect your account
+                </p>
+            </div>
+            <div class="space-y-4 flex lg:block items-center gap-x-4">
+                <div class="w-16 h-16 bg-gray-200 rounded-full flex justify-center items-center">
+                    <img class="h-9 w-9" src="assets/building-columns-solid.svg" alt="">
+                </div>
+                <p class="text-gray-600 font-bold w-52">
+                    We hold your money with established financial instructions
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
