@@ -9,9 +9,10 @@
           <a href="" class="font-semibold text-lg text-primary px-4 py-1 rounded-full  hover:bg-gray-100">Business</a>
         </div>
       </div>
-      <div class="h-12 w-12 bg-gray-200 rounded-full flex lg:hidden justify-center items-center">
+      <button (click)="toggleShowMenu()"
+        class="h-12 w-12 bg-gray-200 rounded-full flex lg:hidden justify-center items-center">
         <img class="h-6 w-6" src="/assets/bars-solid.svg" alt="">
-      </div>
+      </button>
       <div class="gap-x-1 hidden lg:flex">
         <a href="" class="font-semibold text-lg text-primary px-4 py-1 rounded-full text-center hover:bg-gray-100">
           Features
@@ -30,6 +31,35 @@
         <a href="" class="font-semibold text-lg text-primary px-4 py-1 rounded-full hover:bg-gray-100">Register</a>
         <a href=""
           class="font-semibold text-lg text-primary bg-secondary px-4 py-1 rounded-full hover:brightness-90 ">Log
+          in</a>
+      </div>
+      <div [ngClass]="showMenu?'flex':'hidden'" class="transition duration-300 flex  flex-col items-start gap-y-4 absolute top-0 right-0  h-screen w-full bg-white p-4">
+        <div class="border-b w-full py-4 flex justify-between items-center" >
+        <h1 class="font-black italic text-4xl text-primary ">MISE</h1>
+        <button (click)="toggleShowMenu()" class="text-2xl text-gray-400 " >close</button>
+        </div>
+        <div class="space-x-1">
+          <a href=""
+            class="font-semibold text-lg text-primary bg-secondary px-4 py-1 rounded-full hover:brightness-90 ">Perosnal</a>
+          <a href="" class="font-semibold text-lg text-primary px-4 py-1 rounded-full  hover:bg-gray-100">Business</a>
+        </div>
+        <a href="" class="font-semibold text-lg text-primary px-4 py-1 rounded-full text-center hover:bg-gray-100">
+          Features
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 fill-primary inline" viewBox="0 0 320 512">
+            <path
+              d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z" />
+          </svg>
+        </a>
+        <a href="" class="font-semibold text-lg text-primary px-4 py-1 rounded-full hover:bg-gray-100">Pricing</a>
+        <a href="" class="font-semibold text-lg text-primary px-4 py-1 rounded-full hover:bg-gray-100">Help</a>
+        <a href=""
+          class="font-semibold text-lg text-primary px-4 py-1 rounded-full flex justify-center items-center gap-x-1 hover:bg-gray-100">
+          <img class="h-8 w-8" src="assets/us.png" alt="">
+          EN
+        </a>
+        <a href="" class="w-full text-center border border-primary font-semibold text-lg text-primary px-4 py-1 rounded-full hover:bg-secondary">Register</a>
+        <a href=""
+          class="w-full text-center font-semibold text-lg text-primary bg-secondary px-4 py-1 rounded-full hover:brightness-90 ">Log
           in</a>
       </div>
     </nav>
@@ -215,7 +245,8 @@
           more</a>
       </div>
     </section>
-    <section class="p-4 lg:pl-24 flex flex-col lg:flex-row lg:items-center h-full w-full py-6 space-x-4 overflow-hidden">
+    <section
+      class="p-4 lg:pl-24 flex flex-col lg:flex-row lg:items-center h-full w-full py-6 space-x-4 overflow-hidden">
       <div class=" space-y-2 lg:space-y-12  flex-shrink-0">
         <h3 class="text-4xl lg:text-6xl font-black tracking-tighter">
           FOR PEOPLE <br> GOING PLACES
