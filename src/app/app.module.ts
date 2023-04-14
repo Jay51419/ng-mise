@@ -14,15 +14,10 @@ import { HomePageComponent } from './home-page/home-page.component';
     AppComponent,
     BrandLogoComponent,
     CreateAccountPageComponent,
-    HomePageComponent
+    HomePageComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    LayoutModule,
-  ],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, LayoutModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

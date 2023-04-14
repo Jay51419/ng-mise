@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import Scrollbar, { ScrollbarPlugin } from 'smooth-scrollbar';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ScrollbarService {
   scrollbar?: Scrollbar;
   constructor() {
-    Scrollbar.use(ModalPlugin)
+    Scrollbar.use(ModalPlugin);
   }
 
   setScrollbar(s: Scrollbar) {
@@ -16,9 +16,7 @@ export class ScrollbarService {
   getScrollbar() {
     return this.scrollbar;
   }
-
 }
-
 
 class ModalPlugin extends ScrollbarPlugin {
   static override pluginName = 'modal';
@@ -27,7 +25,7 @@ class ModalPlugin extends ScrollbarPlugin {
     open: false,
   };
 
-  override transformDelta(delta: { x: number, y: number }) {
+  override transformDelta(delta: { x: number; y: number }) {
     return this.options.open ? { x: 0, y: 0 } : delta;
   }
 }

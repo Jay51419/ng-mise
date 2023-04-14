@@ -6,16 +6,16 @@ import { HomePageComponent } from './home-page/home-page.component';
 const routes: Routes = [
   {
     path: '',
-    component: HomePageComponent
+    component: HomePageComponent,
   },
   {
     path: 'create-account',
-    component: CreateAccountPageComponent
-  }
+    component: CreateAccountPageComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
