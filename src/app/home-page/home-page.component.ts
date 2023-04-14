@@ -1,5 +1,6 @@
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { Component } from '@angular/core';
+import { ScrollbarService } from '../scrollbar.service';
 
 
 interface ReviewModel {
@@ -16,6 +17,7 @@ interface ReviewModel {
   ]
 })
 export class HomePageComponent {
+  showMenu = false;
   senderAmount: number = 10000;
   senderCurrency: string = "INR"
   recipientCurrency: string = "USD"
@@ -54,7 +56,7 @@ export class HomePageComponent {
   previousReviewCount: number = 0;
   previousReviewTranslateX: number = 0;
 
-  constructor(public breakpointObserver: BreakpointObserver) {}
+  constructor(public breakpointObserver: BreakpointObserver, private scrollbar: ScrollbarService) { }
   ngOnInit(): void {
     this.breakpointObserver
       .observe(['(min-width: 1024px)'])
@@ -66,7 +68,10 @@ export class HomePageComponent {
         }
       });
   }
-  
+  toggleShowMenu() {
+    this.showMenu = !this.showMenu
+    this.scrollbar.getScrollbar()?.updatePluginOptions('modal', { open: this.showMenu })
+  }
   calculateAmount() {
     if (this.senderAmount >= 5000) {
       this.senderErrorMessage = ""
